@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+
+{% load staticfiles %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../../../favicon.ico">
+
+  <title>Social Sounds Good-책 추천</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="home.css" rel="stylesheet">
+
+  <style>
+    body {
+      padding-bottom: 0rem;
+      color: #5a5a5a;
+    }
+
+    .jumbotron {
+      text-align: center;
+      margin-bottom: 2rem;
+      background: url('../static/img/main_crop.jpg');
+    }
+
+    .main_jumbo {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      color: #FFFFFF;
+    }
+
+    .main_jumbo p {
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      padding-top: 2rem;
+      margin-bottom: 0px;
+      margin-top: 2rem;
+      width: 100%;
+      background-color: #FFFFFF;
+      border-top: .05rem solid #e5e5e5;
+    }
+
+    footer p {
+      margin-bottom: .15rem;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="collapse bg-*" style="background-color: #132E40;" id="navbarHeader">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 py-4">
+            <h4 class="text-white">About</h4>
+            <p class="text-muted">
+              "찾고 싶은 정보는 있는데 어느 책을 읽어야할지...."<br>이 세상 모든 책을 읽은 누군가가 내가 찾는 바로 그 책을 추천해준다면?<br><br> 소셜리스닝을 통해 책에 대한 정보를 얻고 RFM을 통해 우수한 책을 선별합니다. </p>
+              <p><a href="/about" class="text-white"><strong>More</a></strong></p>
+          </div>
+          <div class="col-sm-4 py-4">
+            <h4 class="text-white">Contact</h4>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-white">Follow on Twitter</a></li>
+              <li><a href="#" class="text-white">Like on Facebook</a></li>
+              <li><a href="#" class="text-white">Email me</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navbar navbar-dark" style="background-color: #132E40;">
+      <div class="container d-flex justify-content-between">
+        <a href="/" class="navbar-brand"><span class="text-white mb-0 h5">SocialSoundsGood</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
+    </div>
+  </header>
+
+  <main role="main">
+    <section>
+      <div class="jumbotron text-center">
+        <div class="main_jumbo" style="background-color:rgba(0, 0, 0, 0.3);">
+          <h1><strong>소셜리스닝 기반 책 추천<strong></h1>
+          <p class="lead text-white">당신만의 책을 찾아보세요.</p>
+          <p>
+            <div class="row justify-content-lg-center">
+              <div class="btn-group mr-md-2" id="category">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">분야</button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="/econ">경영/경제</a>
+                  <a class="dropdown-item" href="/sci">과학</a>
+                </div>
+              </div>
+              <form class="form-inline" method="post"> {% csrf_token %}
+                <input class="form-control mr-md-6" name="search_word" type="text" class="text" placeholder="분야를 선택해 주세요." readonly>
+
+              </form>
+            </div>
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col col-md placeholder">
+           {% for item in items0 %}
+           <h3></h3>
+          <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+          <p>
+            <h5><strong>{{item.title}}</strong></h5>
+            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+            <p class="text">{{item.author}}</p>
+            <p class="text">추천 지수 : {{trfs0}}</p>
+            <p class="text">{{tag}}</p>
+            {% endfor %}
+          </p>
+        </div>
+        <div class="col col-md placeholder">
+          <h3>   </h3> {% for item in items1 %}
+          <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+          <p>
+            <h5><strong>{{item.title}}</strong></h5>
+            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+            <p class="text">{{item.author}}</p>
+            <p class="text">추천 지수 : {{trfs1}}</p>
+            <p class="text">{{tag}}</p>
+            {% endfor %}
+          </p>
+        </div>
+        <div class="col col-md placeholder">
+          <h3>   </h3> {% for item in items2 %}
+          <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+          <p>
+            <h5><strong>{{item.title}}</strong></h5>
+            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+            <p class="text">{{item.author}}</p>
+            <p class="text">추천 지수 : {{trfs2}}</p>
+            <p class="text">{{tag}}</p>
+          {% endfor %}
+          </p>
+        </div>
+        <div class="col col-md placeholder">
+          <h3>   </h3> {% for item in items3 %}
+          <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+          <p>
+            <h5><strong>{{item.title}}</strong></h5>
+            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+            <p class="text">{{item.author}}</p>
+            <p class="text">추천 지수 : {{trfs3}}</p>
+            <p class="text">{{tag}}</p>
+            {% endfor %}
+          </p>
+        </div>
+        <div class="col col-md placeholder">
+          <h3>   </h3> {% for item in items4 %}
+          <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+          <p>
+            <h5><strong>{{item.title}}</strong></h5>
+            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+            <p class="text">{{item.author}}</p>
+            <p class="text">추천 지수 : {{trfs4}}</p>
+            <p class="text">{{tag}}</p>
+            {% endfor %}
+          </p>
+        </div>
+      </div>
+
+  </main>
+
+  <footer class="footer text-muted">
+    <div class="container">
+      <p class="float-right">
+        <a href="#top">Back to top</a>
+      </p>
+      <p>서울시립대학교 실전문제연구단 X-TWICE</p>
+      <p class="float-right">
+        <a href="http://datamining.uos.ac.kr/">서울시립대학교 데이터마이닝 연구실</a>
+      </p>
+      <p>&copy;2017 SocialSoundsGood. All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <script>
+    window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')
+  </script>
+  <script src="../../../../assets/js/vendor/popper.min.js"></script>
+  <script src="../../../../dist/js/bootstrap.min.js"></script>
+  <script src="../../../../assets/js/vendor/holder.min.js"></script>
+  <script>
+    Holder.addTheme('thumb', {
+      bg: '#55595c',
+      fg: '#eceeef',
+      text: 'Thumbnail'
+    });
+  </script>
+</body>
+
+</html>

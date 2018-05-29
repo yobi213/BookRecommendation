@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+
+{% load staticfiles %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+      integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Social Sounds Good-책 추천</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="home.css" rel="stylesheet">
+
+    <style>
+    body {
+      padding-bottom: 3rem;
+      color: #5a5a5a;
+    }
+
+    .jumbotron {
+      text-align: center;
+      margin-bottom: 2rem;
+      background: url('../static/img/economy_crop.jpg') no-repeat;;
+    }
+
+    .main_jumbo {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      color: #FFFFFF;
+    }
+
+    .main_jumbo p {
+      margin-bottom: 2rem;
+    }
+
+
+    footer {
+      padding-top: 2rem;
+      margin-bottom: 0px;
+      margin-top: 2rem;
+      width: 100%;
+      background-color: #FFFFFF;
+      border-top: .05rem solid #e5e5e5;
+    }
+
+    footer p {
+      margin-bottom: .15rem;
+      color: #777;
+    }
+    /* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+    /* Carousel base class */
+
+    .carousel #myCarousel {
+      align-content: center;
+    }
+    .carousel-control-next{
+      border-radius: 50%;
+      height: 3rem;
+      width: 3rem;
+      right: 10%;
+      top: 50%;
+      background-color:rgba(0, 0, 0, 0.4);
+    }
+    .carousel-control-prev{
+      border-radius: 50%;
+      height: 3rem;
+      width: 3rem;
+      left: 7%;
+      top: 50%;
+      background-color:rgba(0, 0, 0, 0.4);
+    }
+    .carousel-indicators li{
+      background-color:rgba(0, 0, 0, 0.2);
+    }
+    .carousel-indicators .active{
+      background-color:rgba(0, 136, 178, 0.8);
+    }
+
+    /* Since positioning the image, we need to help out the caption */
+
+
+    /* Declare heights because of positioning of img element */
+
+    .carousel-item {
+      height: 30rem;
+      background-color: #FFFFFF;
+    }
+
+    @media (min-width: 40em) {
+      /* Bump up size of carousel content */
+      .carousel-caption p {
+        margin-bottom: 1.25rem;
+        font-size: 1.25rem;
+        line-height: 1.4;
+      }
+    }
+
+    </style>
+</head>
+
+<body>
+<header>
+    <div class="collapse bg-*" style="background-color: #132E40;" id="navbarHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 py-4">
+                    <h4 class="text-white">About</h4>
+                    <p class="text-muted">
+                        "찾고 싶은 정보는 있는데 어느 책을 읽어야할지...."<br>이 세상 모든 책을 읽은 누군가가 내가 찾는 바로 그 책을 추천해준다면?<br><br> 소셜리스닝을 통해 책에
+                        대한 정보를 얻고 RFM을 통해 우수한 책을 선별합니다. </p>
+                        <p><a href="/about" class="text-white"><strong>More</a></strong></p>
+                </div>
+                <div class="col-sm-4 py-4">
+                    <h4 class="text-white">Contact</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                        <li><a href="#" class="text-white">Like on Facebook</a></li>
+                        <li><a href="#" class="text-white">Email me</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-dark" style="background-color: #132E40;">
+        <div class="container d-flex justify-content-between">
+            <a href="/" class="navbar-brand"><span class="text-white mb-0 h5">SocialSoundsGood</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
+                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main role="main">
+    <section>
+        <div class="jumbotron text-center">
+            <div class="main_jumbo" style="background-color:rgba(0, 0, 0, 0.3);">
+                <h1><strong>소셜리스닝 기반 책 추천<strong></h1>
+                <p class="lead text-white">당신만의 책을 찾아보세요.</p>
+                <p>
+                <div class="row justify-content-lg-center">
+                    <div class="btn-group mr-md-2" id="category">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">경영/경제
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/econ">경영/경제</a>
+                            <a class="dropdown-item" href="/sci">과학</a>
+                        </div>
+                    </div>
+                    <form class="form-inline" method="post"> {% csrf_token %}
+                        <input class="form-control mr-md-6" name="search_word" type="text" class="text"
+                               placeholder="#검색어#검색어···">
+                        <button type="submit" class="btn btn-primary">검색</button>
+                    </form>
+                </div>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-md placeholder">
+                            {% for item in items0 %}
+                            <h3>{{rank0}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs0}}<br>
+                            {{tag0}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items1 %}
+                            <h3>{{rank1}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs1}}<br>
+                            {{tag1}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items2 %}
+                            <h3>{{rank2}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs2}}<br>
+                            {{tag2}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items3 %}
+                            <h3>{{rank3}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs3}}<br>
+                            {{tag3}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items4 %}
+                            <h3>{{rank4}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs4}}<br>
+                            {{tag4}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-md placeholder">
+                            {% for item in items5 %}
+                            <h3>{{rank5}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}</p>
+                            <p class="text">추천 지수 : {{trfs5}}</p>
+                            <p class="text">{{tag5}}</p>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items6 %}
+                            <h3>{{rank6}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs6}}<br>
+                            {{tag6}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items7 %}
+                            <h3>{{rank7}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs7}}<br>
+                            {{tag7}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items8 %}
+                            <h3>{{rank8}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs8}}<br>
+                            {{tag8}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items9 %}
+                            <h3>{{rank9}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs9}}<br>
+                            {{tag9}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-md placeholder">
+                            {% for item in items10 %}
+                            <h3>{{rank10}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs10}}<br>
+                            {{tag10}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items11 %}
+                            <h3>{{rank11}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs11}}<br>
+                            {{tag11}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items12 %}
+                            <h3>{{rank12}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs12}}<br>
+                            {{tag12}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items13 %}
+                            <h3>{{rank13}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs13}}<br>
+                            {{tag13}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items14 %}
+                            <h3>{{rank14}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs14}}<br>
+                            {{tag14}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-md placeholder">
+                            {% for item in items15 %}
+                            <h3>{{rank15}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs15}}<br>
+                            {{tag15}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items16 %}
+                            <h3>{{rank16}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs16}}<br>
+                            {{tag16}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items17 %}
+                            <h3>{{rank17}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs17}}<br>
+                            {{tag17}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items18 %}
+                            <h3>{{rank18}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs18}}<br>
+                            {{tag18}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="col col-md placeholder">
+                            {% for item in items19 %}
+                            <h3>{{rank19}}</h3>
+                            <a href="{{item.link}}"><img src="{{item.image}}" alt="" width="129" height="190"></a>
+                            <p>
+                            <h5><strong>{{item.title}}</strong></h5>
+                            <!--<h7 class="card-subtitle mb-2 text-muted">{{item.subtitle}}</h7>-->
+                            <p class="text">{{item.author}}<br><br>
+                            추천 지수 : {{trfs19}}<br>
+                            {{tag19}}<br>
+                            {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</main>
+
+<footer class="footer text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a href="#top">Back to top</a>
+        </p>
+        <p>서울시립대학교 실전문제연구단 X-TWICE</p>
+        <p class="float-right">
+            <a href="http://datamining.uos.ac.kr/">서울시립대학교 데이터마이닝 연구실</a>
+        </p>
+        <p>&copy;2017 SocialSoundsGood.All Rights Reserved</p>
+    </div>
+</footer>
+<!-- Bootstrap core JavaScript
+  ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+<script>
+    window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')
+
+</script>
+<script src="../../../../assets/js/vendor/popper.min.js"></script>
+<script src="../../../../dist/js/bootstrap.min.js"></script>
+<script src="../../../../assets/js/vendor/holder.min.js"></script>
+<script>
+    Holder.addTheme('thumb', {
+      bg: '#55595c',
+      fg: '#eceeef',
+      text: 'Thumbnail'
+    });
+
+</script>
+</body>
+
+</html>
