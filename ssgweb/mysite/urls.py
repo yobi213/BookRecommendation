@@ -18,8 +18,12 @@ from django.conf.urls import url
 from mysite.views import *
 
 urlpatterns = [
+    # url(r'^$', findrandom, name='home'),
+    # url(r'^econ/$', EconView.as_view(), name='econ'),
+    # url(r'^sci/$', SciView.as_view(), name='sci'),
+    # url(r'^about/$', AboutView.as_view(), name='about'),
     url(r'^$', findrandom, name='home'),
-    url(r'^econ/$', EconView.as_view(), name='econ'),
-    url(r'^sci/$', SciView.as_view(), name='sci'),
-    url(r'^about/$', AboutView.as_view(), name='about'),
+    url(r'econ$', EconView.as_view(), name='econ'),
+    url(r'sci$', SciView.as_view(), name='sci'),
+    url(r'about$', AboutView.as_view(), name='about'),
 ]
