@@ -27,4 +27,3 @@ python manage.py runserver
 <img width="1279" alt="스크린샷 2020-05-15 오후 1 40 18" src="https://user-images.githubusercontent.com/39682914/82012020-a895f880-96b1-11ea-82e7-0121e0e38457.png">
  </div>
  
-특허 : [상품 추천 서버 및 상품 추천 방법](http://kpat.kipris.or.kr/kpat/biblioa.do?method=biblioFrame)
